@@ -14,23 +14,19 @@
 <?php
 header('Content-Language: ru;');
 header('Content-Type: text/html; charset=utf-8');
-	mysql_connect ("localhost", "racing","VYq0ekNo");
-	mysql_select_db("racing") or die (mysql_error());
-	mysql_query('SET character_set_database = utf8'); 
-	mysql_query ("SET NAMES 'utf8'");
-	error_reporting(E_ALL); 
+	mysqli_connect ("localhost", "racing","123456", "racing");
 	ini_set("display_errors", 1);
 	
 if (isset($_POST['login']) && isset($_POST['password'])){
-	$login = mysql_real_escape_string(htmlspecialchars($_POST['login']));
+	$login = $_POST['login'];
 	$password = md5(trim($_POST['password'])); //SarRac1ng
     $query = "SELECT user_id, user_login
             FROM users
             WHERE user_login= '$login' AND user_password = '$password'
             LIMIT 1";
-    $sql = mysql_query($query) or die(mysql_error());
-    if (mysql_num_rows($sql) == 1) {
-        $row = mysql_fetch_assoc($sql);
+    $sql = mysqli_query($query);
+    if (mysqli_num_rows($sql) == 1) {
+        $row = mysqli_fetch_assoc($sql);
 		$_SESSION['user_id'] = $row['user_id'];
 		$_SESSION['user_login'] = $row['user_login'];
 		setcookie("CookieMy", $row['user_login'], time()+60*60*24*10);
@@ -70,7 +66,7 @@ if (isset($_SESSION['user_id'])){ ?>
             <table width="700px;" class="table table-striped">
 			<tr><th style="width:5%;">№</th><th style="width:60%;">ФИО</th><th style="width:20%;">Автомобиль</th><th style="width:15%;">Состояние</th><th style="width:15%;">Подтвердить</th><th style="width:15%;">Удалить</th></tr>
 			<?php 
-				$connect = mysqli_connect("localhost","racing","VYq0ekNo","racing");
+				$connect = mysqli_connect("localhost","racing","123456","racing");
 				mysqli_set_charset($connect, "utf8");
 				$result = $connect->query("SELECT * FROM `racing`");
 				$i = 1;
@@ -128,7 +124,7 @@ html;
 	if(isset($_GET['accept']) and isset($_SESSION['user_id'])){
 		$id = $_GET['id'];
 		$accept = $_GET['accept'];		
-		$connect = mysqli_connect("localhost","racing","VYq0ekNo","racing");
+		$connect = mysqli_connect("localhost","racing","123456","racing");
 		mysqli_set_charset($connect, "utf8");
 			if($accept == 1) {
 				$maxid = $connect->query("SELECT MAX(accorder) FROM `racing`;");
@@ -147,7 +143,7 @@ html;
 	
 	if(isset($_GET['del']) and isset($_SESSION['user_id'])){
 		$id = $_GET['id'];
-		$connect = mysqli_connect("localhost","racing","VYq0ekNo","racing");
+		$connect = mysqli_connect("localhost","racing","123456","racing");
 		mysqli_set_charset($connect, "utf8");
 		$del = $connect->query("DELETE FROM `racing` WHERE `id` = \"$id\";");
 		if(isset($del)){

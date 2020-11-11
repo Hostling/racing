@@ -40,7 +40,7 @@
 
           <div class="inner cover">
               <?php
-              $connect = mysqli_connect("localhost","racing","VYq0ekNo","racing");
+              $connect = mysqli_connect("localhost","racing","123456","racing");
 		mysqli_set_charset($connect, "utf8");
 		$result = $connect->query("SELECT `value` FROM `settings` where `name` = 'headerdrift'");
 		$header = mysqli_fetch_row($result);
@@ -56,7 +56,7 @@
 			<table width="700px" class="table table-striped">
 			<th style="width:5%;">№</th><th style="width:60%;">ФИО</th><th style="width:20%;">Автомобиль</th><th style="width:20%;">Город</th>
 			<?php 
-				$connect = mysqli_connect("localhost","racing","VYq0ekNo","racing");
+				$connect = mysqli_connect("localhost","racing","123456","racing");
 				mysqli_set_charset($connect, "utf8");
 				$result = $connect->query("SELECT * FROM `drift`");
 				$i = 1;
@@ -92,7 +92,7 @@
 				$auto = $_POST['auto'];
 				$city = $_POST['city'];
 				
-				$connect = mysqli_connect("localhost","racing","VYq0ekNo","racing");
+				$connect = mysqli_connect("localhost","racing","123456","racing");
 				mysqli_set_charset($connect, "utf8");
 					$result = $connect->query("SELECT MAX(id) FROM `drift`;");
 				   $res = mysqli_fetch_row($result);

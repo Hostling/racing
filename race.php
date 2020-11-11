@@ -12,7 +12,7 @@
     </head>
    <body>
    		<?php
-if (isset($_SESSION['user_id'])){ ?>
+if (true){ ?>
 
 		<script src="http://code.jquery.com/jquery-latest.js"></script>
 		<script src="js/bootstrap.min.js"></script>
@@ -43,7 +43,7 @@ if (isset($_SESSION['user_id'])){ ?>
 			
 			
 			<?php
-			$connect = mysqli_connect("localhost","racing","VYq0ekNo","racing");
+			$connect = mysqli_connect("localhost","racing","123456","racing");
 		mysqli_set_charset($connect, "utf8");
 		$result = $connect->query("SELECT * FROM `qual`");
 		while($re = mysqli_fetch_array($result)) {
@@ -86,13 +86,13 @@ if (isset($_SESSION['user_id'])){ ?>
 
 <?php	
 	if($_GET['action'] == 'madequal'){	
-		$connect = mysqli_connect("localhost","racing","VYq0ekNo","racing");
+		$connect = mysqli_connect("localhost","racing","123456","racing");
 		mysqli_set_charset($connect, "utf8");
 		$result = $connect->query("INSERT INTO `qual` (fio, auto) SELECT fio, auto FROM `racing` WHERE accept = 1 ORDER BY accorder ASC;");
 		header("Location: race.php");
 	}
 	if($_GET['action'] == 'clearqual'){	
-		$connect = mysqli_connect("localhost","racing","VYq0ekNo","racing");
+		$connect = mysqli_connect("localhost","racing","123456","racing");
 		mysqli_set_charset($connect, "utf8");
 		$result = $connect->query("TRUNCATE TABLE qual");
 		header("Location: race.php");
